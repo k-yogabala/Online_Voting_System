@@ -1,0 +1,63 @@
+The error **ER_ROW_IS_REFERENCED_2 (errno: 1451)** occurs because **the candidate you are trying to delete has votes associated with them in the `votes` table**, which has a **foreign key constraint** on `candidate_id`.  
+
+Since MySQL prevents deleting a **parent row** (candidate) while it still has **child rows** (votes referencing it), you need to handle this properly.  
+
+---
+
+## **🔴 Solution: Delete Dependent Votes First**
+### **Update Your Backend Code**
+Modify the `DELETE` API to first remove all votes linked to the candidate **before** deleting the candidate.
+
+```javascript
+app.delete("/delete-candidate/:id", (req, res) => {
+    const candidateId = req.params.id;
+
+    // Step 1: Delete votes associated with this candidate
+    const deleteVotesQuery = "DELETE FROM votes WHERE candidate_id = ?";
+    db.query(deleteVotesQuery, [candidateId], (err, result) => {
+        if (err) {
+            console.error("❌ Error deleting votes:", err);
+            return res.status(500).json({ message: "Error deleting votes", error: err });
+        }
+
+        // Step 2: Delete the candidate after votes are removed
+        const deleteCandidateQuery = "DELETE FROM candidates WHERE id = ?";
+        db.query(deleteCandidateQuery, [candidateId], (err, result) => {
+            if (err) {
+                console.error("❌ Error deleting candidate:", err);
+                return res.status(500).json({ message: "Error deleting candidate", error: err });
+            }
+
+            if (result.affectedRows === 0) {
+                console.warn("⚠️ No candidate found with this ID.");
+                return res.status(404).json({ message: "Candidate not found" });
+            }
+
+            console.log("✅ Candidate deleted successfully.");
+            res.json({ message: "Candidate deleted successfully" });
+        });
+    });
+});
+```
+
+---
+
+## **Alternative: Use CASCADE on Foreign Key**
+If you **want votes to be automatically deleted** when a candidate is deleted, modify your MySQL table schema by setting **ON DELETE CASCADE**:
+
+```sql
+ALTER TABLE votes DROP FOREIGN KEY votes_ibfk_1;
+ALTER TABLE votes ADD CONSTRAINT votes_ibfk_1
+FOREIGN KEY (candidate_id) REFERENCES candidates(id) ON DELETE CASCADE;
+```
+- Now, whenever you delete a candidate, **all their votes will be deleted automatically**.
+- Restart your MySQL server after making schema changes.
+
+---
+
+## **✅ Final Steps**
+1. ✅ **Apply the updated backend code**  
+2. ✅ **Restart your Node.js server (`Ctrl + C`, then `node index.js`)**  
+3. ✅ **Try deleting a candidate again**  
+
+If you still face issues, let me know the exact error! 🚀
