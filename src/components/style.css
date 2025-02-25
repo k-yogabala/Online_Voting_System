@@ -387,14 +387,14 @@ marquee {
 .cta-section {
   margin-top: 30px;
   padding: 20px;
-  background: #007bff;
-  color: white;
+  background: #faf9fcdd;
+  color: black;
   border-radius: 10px;
 }
 
 .cta-button {
-  background: #fff;
-  color: #007bff;
+  background: #79c457;
+  color: black;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;

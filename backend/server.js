@@ -51,6 +51,31 @@ app.get("/candidates", (req, res) => {
         res.json(result);
     });
 });
+// ✅ API to Update Candidate
+app.put("/update-candidate/:id", upload.single("photo"), (req, res) => {
+    const { id } = req.params;
+    const { name, party, bio } = req.body;
+    const photo = req.file ? `/uploads/${req.file.filename}` : null;
+
+    let updateQuery = "UPDATE candidates SET name=?, party=?, bio=?";
+    let values = [name, party, bio];
+
+    if (photo) {
+        updateQuery += ", photo=?";
+        values.push(photo);
+    }
+
+    updateQuery += " WHERE id=?";
+    values.push(id);
+
+    db.query(updateQuery, values, (err, result) => {
+        if (err) {
+            console.error("❌ Update Candidate Error:", err);
+            return res.status(500).json({ error: "Database error while updating candidate." });
+        }
+        res.json({ message: "✅ Candidate updated successfully!" });
+    });
+});
 
 // ✅ API to Add Candidate (Admin)
 app.post("/add-candidate", upload.single("photo"), (req, res) => {
@@ -101,6 +126,21 @@ app.get("/check-vote/:userId", (req, res) => {
         } else {
             res.json({ voted: false });
         }
+    });
+});
+app.get("/voters", (req, res) => {
+    const query = `
+        SELECT user_email, vote_time 
+        FROM votes 
+        ORDER BY vote_time DESC;
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error("❌ Error fetching voters:", err);
+            return res.status(500).json({ error: "Database error while fetching voters." });
+        }
+        res.json(results);
     });
 });
 

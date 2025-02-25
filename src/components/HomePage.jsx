@@ -7,7 +7,7 @@ const HomePage = ({ user, setUser }) => {
   const location = useLocation(); // ✅ Get the current route
 
   useEffect(() => {
-    const electionEndTime = new Date("2025-02-24T00:00:00"); // Set election end time
+    const electionEndTime = new Date("2025-02-26T00:00:00"); // Set election end time
 
     const updateTimer = () => {
       const now = new Date();
@@ -54,6 +54,11 @@ const HomePage = ({ user, setUser }) => {
               Dashboard
             </Link>
           )}
+          {user && (
+            <Link to={user.email === "admin@gmail.com" ? "/users" : "/vote"}>
+              Voters
+            </Link>
+          )}
           {user ? (
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
           ) : (
@@ -92,10 +97,6 @@ const HomePage = ({ user, setUser }) => {
         🗳️ Voter registrations close on Feb 23rd | 📢 Presidential Debate scheduled for March 1st | 🔔 Voting starts on Feb 20th | 🚀 Vote securely through Vote Karo!
       </marquee>
     </div>
-    <div className="hero-section">
-      <img src="https://dymk4s89vutua.cloudfront.net/wp-content/plugins/r2v-api/images/LoksabhaelectionBanner.jpg?x83913" alt="Vote Karo Banner" className="hero-image" />
-      
-    </div>
 
     {/* Features Section */}
     <div className="features">
@@ -115,6 +116,7 @@ const HomePage = ({ user, setUser }) => {
         <h3>📊 Live Results</h3>
         <p>Track real-time election results as votes are counted.</p>
       </div>
+      
     </div>
 
     {/* Call to Action */}
@@ -122,6 +124,8 @@ const HomePage = ({ user, setUser }) => {
       <h3>Be a responsible citizen! Cast your vote today. 🗳️</h3>
       <button className="cta-button" onClick={() => navigate("/login")}>Vote Now</button>
     </div>
+    <br></br>
+    
   </div>
 )}
 

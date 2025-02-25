@@ -13,6 +13,7 @@ import Vote from './pages/Vote';
 import AdminDashboard from './pages/AdminDashboard'
 import FAQ from './pages/FAQ';
 import Upcoming from './pages/Upcoming';
+import Voter from './pages/Voter';
 function App() {
   const [count, setCount] = useState(0);
   const [user, setUser] = useState(() => {
@@ -42,6 +43,7 @@ function App() {
           <Route path="admin-dashboard" element={<AdminDashboard/>}/>
           <Route path="faq" element={<FAQ/>}/>
           <Route path="upcoming" element={<Upcoming/>}/>
+          <Route path="users" element={<Voter/>}/>
         </Route>
       </Routes>
     </Router>
