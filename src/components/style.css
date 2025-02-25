@@ -322,7 +322,6 @@ body {
   padding: 20px;
 }
 
-/* Hero Section */
 .hero-section {
   position: relative;
   text-align: center;
@@ -346,7 +345,6 @@ body {
   border-radius: 10px;
 }
 
-/* Scrolling News */
 .news-ticker {
   margin: 20px 0;
   background: #f8f8f8;
@@ -365,7 +363,6 @@ marquee {
   color: #d9534f;
 }
 
-/* Features */
 .features {
   display: flex;
   justify-content: center;
@@ -383,7 +380,6 @@ marquee {
   text-align: center;
 }
 
-/* Call to Action */
 .cta-section {
   margin-top: 30px;
   padding: 20px;

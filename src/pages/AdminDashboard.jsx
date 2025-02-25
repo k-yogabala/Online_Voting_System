@@ -37,7 +37,7 @@ const AdminDashboard = () => {
         }
     };
 
-    // Handle form submission (Add or Edit)
+    // form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -67,7 +67,6 @@ const AdminDashboard = () => {
         }
     };
 
-    // Handle Delete Candidate
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this candidate?")) {
             try {
@@ -79,7 +78,6 @@ const AdminDashboard = () => {
         }
     };
 
-    // Handle Edit Candidate
     const handleEdit = (candidate) => {
         setEditMode(true);
         setEditCandidateId(candidate.id);
@@ -90,7 +88,6 @@ const AdminDashboard = () => {
         setCandidatePhoto(null); 
     };
 
-    // Reset Form
     const resetForm = () => {
         setCandidateId("");
         setCandidateName("");

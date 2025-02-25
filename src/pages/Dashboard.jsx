@@ -8,7 +8,6 @@ const Dashboard = () => {
     const [votedCandidateId, setVotedCandidateId] = useState(null);
     const navigate = useNavigate();
 
-    // Get user from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
@@ -54,8 +53,6 @@ const Dashboard = () => {
     };
     
     
-
-    // Handle Vote Submission
     const handleVote = async (id) => {
     if (!id || !user?.email) {
         console.error("❌ Missing required fields: Candidate ID or Email");
@@ -73,17 +70,15 @@ const Dashboard = () => {
 
         console.log("✅ Vote successful:", response.data);
 
-        // Show success alert
         window.alert("✅ Your vote has been submitted successfully!");
 
-        // Update state to disable buttons
         setVotedCandidateId(id);
 
     } catch (error) {
         console.error("❌ Error submitting vote:", error.response?.data || error.message);
         
         if (error.response?.data?.error === "User has already voted!") {
-            // If user has already voted, set the votedCandidateId from server response
+            
             checkIfVoted();
         }
     }
@@ -118,12 +113,12 @@ const Dashboard = () => {
     <button 
         className="vote-btn" 
         onClick={() => handleVote(candidate.id)}
-        disabled={votedCandidateId !== null && votedCandidateId !== candidate.id} // ✅ Only disable if the user has voted
+        disabled={votedCandidateId !== null && votedCandidateId !== candidate.id} 
         style={{
             backgroundColor: votedCandidateId === candidate.id ? "#4CAF50" : "#007bff",
             color: "white",
             cursor: votedCandidateId === candidate.id ? "default" : "pointer",
-            opacity: votedCandidateId !== null && votedCandidateId !== candidate.id ? 0.5 : 1, // Dim other candidates
+            opacity: votedCandidateId !== null && votedCandidateId !== candidate.id ? 0.5 : 1, 
         }}
     >
         {votedCandidateId === candidate.id ? "Voted" : "Vote"}

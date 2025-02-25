@@ -4,10 +4,10 @@ import "./style.css";
 
 const HomePage = ({ user, setUser }) => {
   const [timeLeft, setTimeLeft] = useState("");
-  const location = useLocation(); // ✅ Get the current route
+  const location = useLocation(); 
 
   useEffect(() => {
-    const electionEndTime = new Date("2025-02-26T00:00:00"); // Set election end time
+    const electionEndTime = new Date("2025-02-26T00:00:00"); 
 
     const updateTimer = () => {
       const now = new Date();
@@ -27,9 +27,9 @@ const HomePage = ({ user, setUser }) => {
     };
 
     const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer(); // Call immediately
+    updateTimer();
 
-    return () => clearInterval(timerInterval); // Cleanup on unmount
+    return () => clearInterval(timerInterval); 
   }, []);
 
   const navigate = useNavigate();
@@ -118,8 +118,6 @@ const HomePage = ({ user, setUser }) => {
       </div>
       
     </div>
-
-    {/* Call to Action */}
     <div className="cta-section">
       <h3>Be a responsible citizen! Cast your vote today. 🗳️</h3>
       <button className="cta-button" onClick={() => navigate("/login")}>Vote Now</button>
