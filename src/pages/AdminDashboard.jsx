@@ -52,12 +52,12 @@ const AdminDashboard = () => {
                 await axios.put(`http://localhost:5000/update-candidate/${editCandidateId}`, formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
-                console.log("✅ Candidate updated.");
+                console.log("Candidate updated.");
             } else {
                 await axios.post("http://localhost:5000/add-candidate", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
-                console.log("✅ Candidate added.");
+                console.log("Candidate added.");
             }
 
             fetchCandidates();

@@ -42,13 +42,13 @@ const Dashboard = () => {
             const response = await axios.get(`http://localhost:5000/check-vote/${user.email}`);
             
             if (response.data.voted) {
-                setVotedCandidateId(response.data.candidateId); // ✅ Set voted candidate
+                setVotedCandidateId(response.data.candidateId); // Set voted candidate
             } else {
-                setVotedCandidateId(null); // ✅ Ensure new users can vote
+                setVotedCandidateId(null); // Ensure new users can vote
             }
         } catch (error) {
             console.error("❌ Error checking vote status:", error);
-            setVotedCandidateId(null); // ✅ Handle errors properly by resetting vote status
+            setVotedCandidateId(null); // Handle errors properly by resetting vote status
         }
     };
     
@@ -68,9 +68,9 @@ const Dashboard = () => {
             { headers: { "Content-Type": "application/json" } }
         );
 
-        console.log("✅ Vote successful:", response.data);
+        console.log("Vote successful:", response.data);
 
-        window.alert("✅ Your vote has been submitted successfully!");
+        window.alert("Your vote has been submitted successfully!");
 
         setVotedCandidateId(id);
 

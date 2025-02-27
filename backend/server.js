@@ -26,7 +26,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) console.log("❌ Database Connection Error:", err);
-    else console.log("✅ MySQL Connected");
+    else console.log("MySQL Connected");
 });
 
 // Multer Setup for Image Upload
@@ -41,7 +41,7 @@ const upload = multer({ storage });
 // Authentication Routes
 app.use("/api/auth", authRoutes);
 
-// ✅ API to Fetch Candidates (User Dashboard)
+// API to Fetch Candidates (User Dashboard)
 app.get("/candidates", (req, res) => {
     db.query("SELECT * FROM candidates", (err, result) => {
         if (err) {
@@ -51,7 +51,7 @@ app.get("/candidates", (req, res) => {
         res.json(result);
     });
 });
-// ✅ API to Update Candidate
+// API to Update Candidate
 app.put("/update-candidate/:id", upload.single("photo"), (req, res) => {
     const { id } = req.params;
     const { name, party, bio } = req.body;
@@ -73,11 +73,11 @@ app.put("/update-candidate/:id", upload.single("photo"), (req, res) => {
             console.error("❌ Update Candidate Error:", err);
             return res.status(500).json({ error: "Database error while updating candidate." });
         }
-        res.json({ message: "✅ Candidate updated successfully!" });
+        res.json({ message: "Candidate updated successfully!" });
     });
 });
 
-// ✅ API to Add Candidate (Admin)
+// API to Add Candidate (Admin)
 app.post("/add-candidate", upload.single("photo"), (req, res) => {
     const { id, name, party, bio } = req.body;
     const photo = req.file ? `/uploads/${req.file.filename}` : "";
@@ -94,12 +94,12 @@ app.post("/add-candidate", upload.single("photo"), (req, res) => {
                 console.error("❌ MySQL Insert Error:", err);
                 return res.status(500).json({ error: "Failed to add candidate." });
             }
-            res.json({ message: "✅ Candidate added successfully" });
+            res.json({ message: "Candidate added successfully" });
         }
     );
 });
 
-// ✅ API to Delete Candidate
+// API to Delete Candidate
 app.delete("/delete-candidate/:id", (req, res) => {
     const { id } = req.params;
     db.query("DELETE FROM candidates WHERE id = ?", [id], (err) => {
@@ -111,7 +111,7 @@ app.delete("/delete-candidate/:id", (req, res) => {
     });
 });
 
-// ✅ API to Check If User Has Voted
+// API to Check If User Has Voted
 app.get("/check-vote/:userId", (req, res) => {
     const { userId } = req.params;
 
@@ -144,7 +144,7 @@ app.get("/voters", (req, res) => {
     });
 });
 
-// ✅ API to Handle Voting
+// API to Handle Voting
 app.post("/vote", (req, res) => {
     const { email, candidateId } = req.body;
 
@@ -172,7 +172,7 @@ app.post("/vote", (req, res) => {
                     console.error("❌ MySQL Insert Error:", err);
                     return res.status(500).json({ error: "Failed to submit vote." });
                 }
-                res.json({ message: "✅ Vote submitted successfully!" });
+                res.json({ message: "Vote submitted successfully!" });
             }
         );
     });

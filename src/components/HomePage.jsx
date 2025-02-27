@@ -3,34 +3,7 @@ import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import "./style.css";
 
 const HomePage = ({ user, setUser }) => {
-  const [timeLeft, setTimeLeft] = useState("");
   const location = useLocation(); 
-
-  useEffect(() => {
-    const electionEndTime = new Date("2025-02-26T00:00:00"); 
-
-    const updateTimer = () => {
-      const now = new Date();
-      const difference = electionEndTime - now;
-
-      if (difference <= 0) {
-        setTimeLeft("Elections Completed!");
-        return;
-      }
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((difference / (1000 * 60)) % 60);
-      const seconds = Math.floor((difference / 1000) % 60);
-
-      setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-    };
-
-    const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer();
-
-    return () => clearInterval(timerInterval); 
-  }, []);
 
   const navigate = useNavigate();
 
@@ -80,11 +53,9 @@ const HomePage = ({ user, setUser }) => {
 
       {/* Main Content */}
       <div className="main">
-        <div className="timer">
-          <strong>Time Left for Elections: {timeLeft}</strong>
-        </div>
+        
 
-        {/* ✅ Render only on Home Page */}
+        {/* Render only on Home Page */}
         {location.pathname === "/" && (
   <div className="homepage-content">
    
