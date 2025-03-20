@@ -77,7 +77,7 @@ app.put("/update-candidate/:id", upload.single("photo"), (req, res) => {
     });
 });
 
-// API to Add Candidate (Admin)
+// API to Add Candidate
 app.post("/add-candidate", upload.single("photo"), (req, res) => {
     const { id, name, party, bio } = req.body;
     const photo = req.file ? `/uploads/${req.file.filename}` : "";

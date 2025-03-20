@@ -21,7 +21,6 @@ const Dashboard = () => {
         checkIfVoted();
     }, []);
 
-    // Fetch Candidates List
     const fetchCandidates = async () => {
         try {
             const response = await axios.get("http://localhost:5000/candidates");
@@ -31,7 +30,6 @@ const Dashboard = () => {
         }
     };
 
-    // Check if User Has Already Voted
     const checkIfVoted = async () => {
         if (!user?.email) {
             console.warn("⚠️ User email not found.");
@@ -42,13 +40,13 @@ const Dashboard = () => {
             const response = await axios.get(`http://localhost:5000/check-vote/${user.email}`);
             
             if (response.data.voted) {
-                setVotedCandidateId(response.data.candidateId); // Set voted candidate
+                setVotedCandidateId(response.data.candidateId); 
             } else {
-                setVotedCandidateId(null); // Ensure new users can vote
+                setVotedCandidateId(null); 
             }
         } catch (error) {
             console.error("❌ Error checking vote status:", error);
-            setVotedCandidateId(null); // Handle errors properly by resetting vote status
+            setVotedCandidateId(null); 
         }
     };
     

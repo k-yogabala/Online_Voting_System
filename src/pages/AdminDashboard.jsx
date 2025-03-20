@@ -13,7 +13,6 @@ const AdminDashboard = () => {
     const [editCandidateId, setEditCandidateId] = useState(null);
     const [voteResults, setVoteResults] = useState([]);
 
-
     // Fetch candidates
     useEffect(() => {
         fetchCandidates();
@@ -36,8 +35,6 @@ const AdminDashboard = () => {
             console.error("❌ Error fetching vote results:", error);
         }
     };
-
-    // form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();

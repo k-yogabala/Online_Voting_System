@@ -51,17 +51,13 @@ const HomePage = ({ user, setUser }) => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="main">
         
 
-        {/* Render only on Home Page */}
         {location.pathname === "/" && (
   <div className="homepage-content">
    
     
-
-    {/* Scrolling News Headlines */}
     <div className="news-ticker">
       <div className="news-heading">📰 Latest Election News:</div>
       <marquee behavior="scroll" direction="left" scrollamount="5">
@@ -69,7 +65,6 @@ const HomePage = ({ user, setUser }) => {
       </marquee>
     </div>
 
-    {/* Features Section */}
     <div className="features">
       <div className="feature-card">
         <h3>🗳️ Easy Voting</h3>
@@ -102,7 +97,6 @@ const HomePage = ({ user, setUser }) => {
         <Outlet />
       </div>
 
-      {/* Footer */}
       <div className="footer">Copyright &copy; Vote Karo</div>
     </div>
   );
