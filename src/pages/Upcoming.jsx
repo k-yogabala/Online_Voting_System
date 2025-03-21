@@ -43,7 +43,6 @@ const UpcomingElections = () => {
           <div key={index} className="election-card">
             <h3 className="election-title">{election.title}</h3>
             <p className="election-description">{election.description}</p>
-            <button className="vote-button" onClick={() => alert("Please Login first")}>Participate/Vote</button>
           </div>
         ))}
       </div>
