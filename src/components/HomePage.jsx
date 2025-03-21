@@ -15,7 +15,6 @@ const HomePage = ({ user, setUser }) => {
 
   return (
     <div className="container">
-      {/* Navbar */}
       <div className="navbar">
         <h1>Vote Karo</h1>
         <nav>
@@ -43,7 +42,6 @@ const HomePage = ({ user, setUser }) => {
         </nav>
       </div>
 
-      {/* Sidebar */}
       <div className="sidebar">
         <ul>
           <li><Link to="/upcoming">Upcoming Elections</Link></li>
@@ -56,8 +54,6 @@ const HomePage = ({ user, setUser }) => {
 
         {location.pathname === "/" && (
   <div className="homepage-content">
-   
-    
     <div className="news-ticker">
       <div className="news-heading">📰 Latest Election News:</div>
       <marquee behavior="scroll" direction="left" scrollamount="5">

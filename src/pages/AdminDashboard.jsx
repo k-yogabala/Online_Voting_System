@@ -13,7 +13,6 @@ const AdminDashboard = () => {
     const [editCandidateId, setEditCandidateId] = useState(null);
     const [voteResults, setVoteResults] = useState([]);
 
-    // Fetch candidates
     useEffect(() => {
         fetchCandidates();
         fetchVoteResults();
